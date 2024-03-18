@@ -22,7 +22,7 @@ class DataTransformer:
         dataframe.to_csv(filename, index=False)
         print(f"DataFrame saved to {filename}")
 
-api_client = CoinMarketCapAPI()
+api_client = CoinMarketCapAPI('BNB')
 data_transformer = DataTransformer(api_client)
 transformed_data = data_transformer.transform_coinmarketcap_data()
-data_transformer.save_to_csv(transformed_data, "../datasets/coinmarketcap_data.csv")
+data_transformer.save_to_csv(transformed_data, "../datasets/coinmarketcap_bnb_data.csv")

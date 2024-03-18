@@ -10,9 +10,9 @@ class CoinMarketCapAPI:
             self._instance = super().__new__(self)
         return self._instance
 
-    def __init__(self):
+    def __init__(self, crypto):
         self._api_key = self._get_api_key()
-        self.convert = 'BTC,USD,ETH,BNB'
+        self.crypto = crypto
 
     def _get_api_key(self):
         with open('credentials', 'r') as file:
@@ -39,8 +39,9 @@ class CoinMarketCapAPI:
         parameters = {
             'start': '1',
             'limit': '5000',
-            'convert': self.convert
+            'convert': self.crypto
         }
+        
         headers = {
             'Accepts': 'application/json',
             'X-CMC_PRO_API_KEY': self._api_key,
