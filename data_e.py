@@ -36,3 +36,7 @@ def crypto_m(input_dict):
     df = df.set_index('date')
     return df
     
+def set_date(df, date_col):
+    df[date_col] = pd.to_datetime(df[date_col], format='%Y-%m-%dT%H:%M:%S.%f%z')
+    df = df.set_index(date_col).drop(['index'], axis = 1)
+    return df

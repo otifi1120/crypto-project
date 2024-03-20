@@ -10,7 +10,7 @@ end_date = st.sidebar.date_input('End Date')
 
 input_dict = {'symbol': symbol, 'currency': 'USD', 'limit_value': 2000, 'exchange_name': 'CCCAGG', 'end_date': end_date}
 
-crypto_compare, crypto_messari = st.tabs(['Crypto Comaper', 'Messari'])
+crypto_compare, crypto_messari, crypto_mcap = st.tabs(['Crypto Comaper', 'Messari', 'Coin Market Cap'])
 
 price_list, features = [], []
 prices = ['open', 'close', 'high', 'low']
@@ -43,3 +43,18 @@ with crypto_messari:
     except:
         pass
     st.write(df_m[features])
+
+with crypto_mcap:
+    st.title('Coin Market Cap')
+    st.header('BNB')
+    st.write(set_date(pd.read_csv('e_data/coinmarketcap_bnb_data.csv'), 'last_updated'))
+    fig = px.line(pd.read_csv('e_data/coinmarketcap_bnb_data.csv'), x = pd.read_csv('e_data/coinmarketcap_bnb_data.csv').index, y = 'price')
+    st.plotly_chart(fig)
+    st.header('BTC')
+    st.write(set_date(pd.read_csv('e_data/coinmarketcap_btc_data.csv'), 'last_updated'))
+    fig = px.line(pd.read_csv('e_data/coinmarketcap_btc_data.csv'), x = pd.read_csv('e_data/coinmarketcap_bnb_data.csv').index, y = 'price')
+    st.plotly_chart(fig)
+    st.header('ETH')
+    st.write(set_date(pd.read_csv('e_data/coinmarketcap_eth_data.csv'), 'last_updated'))
+    fig = px.line(pd.read_csv('e_data/coinmarketcap_eth_data.csv'), x = pd.read_csv('e_data/coinmarketcap_bnb_data.csv').index, y = 'price')
+    st.plotly_chart(fig)
